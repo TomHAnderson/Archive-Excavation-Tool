@@ -1602,6 +1602,10 @@ function letsJQuery() {
     $('section.result.etree span').after('<input value="" placeholder="enter filter string" id="filter" type="text"> <button class="filter">Filter</button><img src="http://db.etree.org/cd.gif" style="display: none;" id="wait">');
     $('table[style="width:100%;"]').remove();
 
+    $('#browse a').each(function(index, node) {
+        $(this).css('font-size', '1em').css('font-weight', 'normal');
+    });
+
     $('#browse ul').addClass('results').detach().appendTo('section.result.etree').append('<br style="clear: both;">');
     $('#browse').remove();
 
