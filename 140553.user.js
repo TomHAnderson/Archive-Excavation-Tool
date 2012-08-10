@@ -7,7 +7,7 @@
 // @include        http://archive.org/browse.php*
 // @include        http://*.archive.org/search.php*
 // @include        http://*.archive.org/details/*
-// @version        1.0.5
+// @version        1.0.6
 // @author         Tom Anderson <tom.h.anderson@gmail.com>
 // ==/UserScript==
 
@@ -1193,7 +1193,7 @@ function letsJQuery() {
 
                 $('#light .content').append(content);
                 var copy = '<p class="copy iaft_about">'
-                           + '&copy ' + new Date().getFullYear() + ' <a href="#" class="iaft_about">Internet Archive File Types</a></p>';
+                           + '&copy ' + new Date().getFullYear() + ' <a href="#" class="iaft_about">Archive Excavation Tool</a></p>';
 
                 $('#light .content').append(copy);
 
@@ -1342,6 +1342,7 @@ function letsJQuery() {
          IAFT.Lightbox.show(' \
         <div><h1>Archive Excavation Tool</h1> \
         \
+            <img align="left" src="http://db.etree.org/images/pick.shovel.logo.gif"> \
             <p> \
                 AET homepage: <a href="http://userscripts.org/scripts/show/140553">http://userscripts.org/scripts/show/140553</a> \
                 <br> \
@@ -1358,7 +1359,7 @@ function letsJQuery() {
                 To contribute icons please use this library and email your contribution to <a href="mailto:tom.h.anderson@gmail.com">tom.h.anderson@gmail.com</a>. \
             </p> \
             <p> \
-               EAT & IAFT are projects of Tom Anderson.  \
+               AET & IAFT are projects of Tom Anderson.  \
                <br> \
                Produced by <a href="http://db.etree.org/">db.etree.org</a>.  \
            </p> \
