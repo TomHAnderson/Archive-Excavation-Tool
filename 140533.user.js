@@ -22,7 +22,7 @@ try
             try {
                 GM_xmlhttpRequest({
                     method: 'GET',
-                    url: 'http://userscripts.org/scripts/source/107166.meta.js?' + new Date().getTime(),
+                    url: 'http://userscripts.org/scripts/source/140533.meta.js?' + new Date().getTime(),
                     headers: {'Cache-Control': 'no-cache'},
                     onload: function(resp) {
                         var local_version, remote_version, rt, script_name;
@@ -38,7 +38,7 @@ try
                             {
                                 if(confirm('There is an update available for "'+script_name+'."\nWould you like to go to the install page now?'))
                                 {
-                                    GM_openInTab('http://userscripts.org/scripts/show/107166');
+                                    GM_openInTab('http://userscripts.org/scripts/show/140533');
                                     GM_setValue('SUC_current_version', remote_version);
                                 }
                             } else if (forced)
@@ -1254,7 +1254,7 @@ function letsJQuery() {
             <p> \
                 AET homepage: <a href="http://userscripts.org/scripts/show/140553">http://userscripts.org/scripts/show/140553</a> \
                 <br> \
-                AET is a derivitve work of IAFT: <a href="http://userscripts.org/scripts/show/107166">http://userscripts.org/scripts/show/107166</a> \
+                AET is a derivitve work of IAFT: <a href="http://userscripts.org/scripts/show/140533">http://userscripts.org/scripts/show/140533</a> \
             </p> \
             <p> \
                 AET is open sourced under the <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>. \
