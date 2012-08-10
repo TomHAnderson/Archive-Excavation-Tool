@@ -1575,7 +1575,7 @@ function letsJQuery() {
     $('.breadcrumbs').detach().insertAfter('#ia');
 
     // Browse etree
-    $('<section class="result etree"><span class="betterTitle">Artists</span></section>').append($('#browse').detach()).insertAfter('section.iaft');
+    $('<section class="result etree"><span class="betterTitle">Artists</span></section>').append($('#browse').detach()).insertBefore('table[style="width:100%;"]');
     $('section.result.etree span').after('<input value="" placeholder="enter filter string" id="filter" type="text"> <button class="filter">Filter</button>');
     $('table[style="width:100%;"]').remove();
 
