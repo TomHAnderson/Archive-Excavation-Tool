@@ -1336,8 +1336,8 @@ function letsJQuery() {
     // Filter all rows using insensitive indexof function
     $('.filter').live('click', function() {
         $('#wait').show();
-        $('table#browse tbody tr td ul li').show();
-        $('table#browse li').each(function(index, node) {
+        $('ul.results li').show();
+        $('ul.results li').each(function(index, node) {
             if ($('#filter').val() && $(this).find('a:first').html().toLowerCase().indexOf($('#filter').val().toLowerCase().trim()) == -1) {
                 $(this).hide();
             }
