@@ -65,6 +65,12 @@ try
 
 // CSS
 GM_addStyle("\
+    #ia h1 a { \
+        text-decoration: none; \
+    } \
+    #ia h1 a:hover { \
+        text-decoration: underline; \
+    } \
     ul.results { \
         width: 100% \
     } \
@@ -243,7 +249,11 @@ GM_addStyle("\
         z-index:1002; \
         overflow: auto; \
     } \
+    .betterTitle:hover { \
+        text-decoration: underline; \
+    } \
     .betterTitle { \
+        text-decoration: none; \
         font-weight: bold; \
         font-size: 1.25em; \
         color: white; \
@@ -1093,7 +1103,7 @@ function letsJQuery() {
             path = $(li).data('path');
             ext = $(li).data('ext');
             identifier = $(li).data('identifier');
-            var content = 'Internet Archive File Types for directory <a href="' + path + '">' + path + '</a>'
+            var content = '<a href="' + path + '">' + path + '</a>'
                           + '<ul class="IAFTfilelist">';
             for (i in files) {
                 file = $(files[i]);
@@ -1551,7 +1561,7 @@ function letsJQuery() {
     $('.urge').remove();
     $('div.level3HeaderColorBar').remove();
 
-    $('body').prepend('<section class="iaft" id="ia"><h1 id="title"><a href="/">Internet Archive</a></h1><ul id="menu"></ul></section><br style="clear:both;">');
+    $('body').prepend('<section class="iaft" id="ia"><h1 id="title"><a href="/">archive.org</a></h1><ul id="menu"></ul></section><br style="clear:both;">');
 
     $('#IAFT-top-nav').detach().appendTo('#menu');
     $('#IAFT-secondary-nav').detach().appendTo('#menu');
