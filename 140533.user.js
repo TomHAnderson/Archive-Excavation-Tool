@@ -6,7 +6,7 @@
 // @include        http://archive.org/details/*
 // @include        http://*.archive.org/search.php*
 // @include        http://*.archive.org/details/*
-// @version        1.0.2
+// @version        1.0.3
 // @author         Tom Anderson <tom.h.anderson@gmail.com>
 // ==/UserScript==
 
@@ -1449,7 +1449,6 @@ function letsJQuery() {
         $('#gobutton').remove();
         $('#searchform b').remove();
         $('a.level3Header.level3HeaderSearch').removeClass('level3HeaderSearch');
-        $('td.level3Header.level3HeaderLeft').remove();
         $('input[name="search"]').attr('placeholder', 'enter search terms');
         $('select[name="mediatype"]').before('Section');
 
@@ -1495,7 +1494,11 @@ function letsJQuery() {
 
         $('#IAFT-top-nav').detach().appendTo('#menu');
         $('#IAFT-secondary-nav').detach().appendTo('#menu');
-        $('#searchform').detach().appendTo('#menu');
+        $('#searchform').each(function() {
+            $('#IAFT-top-nav').append($('<li />').append($(this)));
+            $(this).removeAttr('style').css('display', 'inline');
+        });
+        $('td.level3Header.level3HeaderLeft').remove();
 
         // Move edit link
         $('td.level3Header.level3HeaderUser2 b nobr a').detach().addClass('edit').insertAfter('div#midcol div.box h1:first');
