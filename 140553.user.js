@@ -4,9 +4,10 @@
 // @description    A tool to provide extended functionality for archive entries
 // @include        http://archive.org/search.php*
 // @include        http://archive.org/details/*
+// @include        http://archive.org/browse.php*
 // @include        http://*.archive.org/search.php*
 // @include        http://*.archive.org/details/*
-// @version        1.0.4
+// @version        1.0.5
 // @author         Tom Anderson <tom.h.anderson@gmail.com>
 // ==/UserScript==
 
@@ -161,6 +162,7 @@ GM_addStyle("\
         background-color: #385C74; \
         border-color: #385C74; \
         color: white; \
+        margin: 0px; \
     } \
     \
     section.audio { \
@@ -1311,6 +1313,17 @@ function letsJQuery() {
         return false;
     });
 
+    // Filter all rows using insensitive indexof function
+    $('.filter').live('click', function() {
+        $('table#browse tbody tr td ul li').show();
+        $('table#browse li').each(function(index, node) {
+            if ($('#filter').val() && $(this).find('a:first').html().toLowerCase().indexOf($('#filter').val().toLowerCase().trim()) == -1) {
+                $(this).hide();
+            }
+        });
+    });
+
+
     // Show the about screen
     $('.iaft_about').live('click', function(event) {
         IAFT.Lightbox.close();
@@ -1504,7 +1517,7 @@ function letsJQuery() {
     // Format header
     $('body table:first').remove();
     $('#searchform').prepend('Search');
-    $('<ul id="IAFT-top-nav"><li><a href="/web/web.php">Web</a></li><li><a href="/details/movies">Movies</a></li><li><a href="/details/texts">Text</a></li><li><a href="/details/audio">Audio</a></li><li><a href="/details/software">Software</a></li><li><a href="/about/">About</a></li><li><a href="/create/">Upload</a></li></ul><ul id="IAFT-secondary-nav" class="audio"></ul>').appendTo('body');
+    $('<ul id="IAFT-top-nav"><li><a href="/web/web.php">Web</a></li><li><a href="/details/movies">Movies</a></li><li><a href="/details/texts">Text</a></li><li><a href="/details/audio">Audio</a></li><li><a href="http://archive.org/browse.php?collection=etree&field=%2Fmetadata%2Fcreator">etree<li><a href="/details/software">Software</a></li><li><a href="/about/">About</a></li><li><a href="/create/">Upload</a></li></ul><ul id="IAFT-secondary-nav" class="audio"></ul>').appendTo('body');
     $('td.level2Header a').each(function() {
         $('#IAFT-secondary-nav').append($('<li />').append($(this)));
     });
@@ -1560,6 +1573,11 @@ function letsJQuery() {
     $('table.searchResults').remove();
 
     $('.breadcrumbs').detach().insertAfter('#ia');
+
+    // Browse etree
+    $('<section class="result etree"><span class="betterTitle">Artists</span></section>').append($('#browse').detach()).insertAfter('section.iaft');
+    $('section.result.etree span').after('<input value="" placeholder="enter filter string" id="filter" type="text"> <button class="filter">Filter</button>');
+    $('table[style="width:100%;"]').remove();
 
     // Run IAFT sections
     $('a.titleLink').each(function(index, node) {
