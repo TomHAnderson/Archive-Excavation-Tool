@@ -6,7 +6,7 @@
 // @include        http://archive.org/details/*
 // @include        http://*.archive.org/search.php*
 // @include        http://*.archive.org/details/*
-// @version        1.0.3
+// @version        1.0.4
 // @author         Tom Anderson <tom.h.anderson@gmail.com>
 // ==/UserScript==
 
@@ -64,9 +64,10 @@ try
 
 // CSS
 GM_addStyle("\
-    div.iaftDetails { \
-        float: left; \
+    div.iaft { \
+        clear: both;\
     } \
+    \
     section.iaft { \
         float:left; \
         margin: 8px; \
@@ -78,6 +79,7 @@ GM_addStyle("\
         padding-bottom: 3px; \
     } \
     section.iaft h1 { \
+        display: block; \
         font-weight: bold; \
         font-size: 1.25em; \
         color: white; \
@@ -96,50 +98,89 @@ GM_addStyle("\
         background-color: #aaaaaa; \
         border-color: #aaaaaa; \
     } \
+    .titleLink { \
+        display: block; \
+        font-weight: bold; \
+        font-size: 1.25em; \
+        color: white; \
+        margin: 0px; \
+        spacing: 0px; \
+        padding: 0px; \
+        height: 16px; \
+        padding-left: 15px; \
+        padding-right: 15px; \
+        padding-top: 5px; \
+        padding-bottom: 5px; \
+        border: solid; \
+        border-width: 1px; \
+        border-top-left-radius: 10px; \
+        border-top-right-radius: 10px; \
+        background-color: yellow; \
+        border-color: yellow; \
+    } \
+    section.result a.titlelink.result { \
+        background-color: yellow; \
+    } \
     \
-    section.iaft.software { \
+    section.result { \
+        margin: 8px; \
+        border: solid; \
+        border-width: 1px; \
+        border-color: #385C74; \
+        background-color: white; \
+        border-radius: 10px; \
+        padding-bottom: 3px; \
+        clear: both; \
+    } \
+    \
+    section.software { \
         border-color: #999966; \
     } \
     \
-    section.iaft.software h1 { \
+    section.software h1, section.software .betterTitle  { \
         background-color: #999966; \
         border-color: #999966; \
+        color: white; \
     } \
     \
-    section.iaft.movies { \
+    section.movies { \
         border-color: #115500; \
     } \
     \
-    section.iaft.movies h1 { \
+    section.movies h1, section.movies .betterTitle { \
         background-color: #115500; \
         border-color: #115500; \
+        color: white; \
     } \
     \
-    section.iaft.etree { \
+    section.etree { \
         border-color: #385C74; \
     } \
     \
-    section.iaft.etree h1 { \
+    section.etree h1, section.etree .betterTitle { \
         background-color: #385C74; \
         border-color: #385C74; \
+        color: white; \
     } \
     \
-    section.iaft.audio { \
+    section.audio { \
         border-color: #385C74; \
     } \
     \
-    section.iaft.audio h1 { \
+    section.audio h1, section.audio .betterTitle { \
         background-color: #385C74; \
         border-color: #385C74; \
+        color: white; \
     } \
     \
-    section.iaft.texts { \
+    section.texts { \
         border-color: #93092D; \
     } \
     \
-    section.iaft.texts h1 { \
+    section.texts h1, section.texts .betterTitle { \
         background-color: #93092D; \
         border-color: #93092D; \
+        color: white; \
     } \
     \
     section#actions.software, section#actions.texts, section#actions.movies { \
@@ -191,10 +232,24 @@ GM_addStyle("\
         overflow: auto; \
     } \
     .betterTitle { \
-        font-size: 16pt; \
+        font-weight: bold; \
+        font-size: 1.25em; \
+        color: white; \
+        margin: 0px; \
+        spacing: 0px; \
+        padding: 0px; \
+        height: 16px; \
+        padding-left: 15px; \
+        padding-right: 15px; \
+        padding-top: 5px; \
+        padding-bottom: 5px; \
+        border: solid; \
+        border-width: 1px; \
+        border-top-left-radius: 10px; \
+        border-top-right-radius: 10px; \
+        background-color: #aaaaaa; \
+        border-color: #aaaaaa; \
         display: block; \
-        padding-bottom: 10px; \
-        text-decoration: none; \
     } \
     p.copy { \
         font-size: 8pt; \
@@ -822,25 +877,36 @@ function letsJQuery() {
                                         $(actions_ul).append(li);
 
                                         $(xml).find('collection').each(function(index, node) {
-                                            $('div.iaft.' + identifier_slug + ' section.iaft').addClass($(this).text());
+                                            $('div.iaft.' + identifier_slug + ' section').addClass($(this).text());
+                                            $('div.iaft.' + identifier_slug).parents('section.result').addClass(string_to_slug($(this).text()));
+                                            $('section#ia').addClass(string_to_slug($(this).text()));
                                         });
                                         $(xml).find('mediatype').each(function(index, node) {
-                                            $('div.iaft.' + identifier_slug + ' section.iaft').addClass($(this).text());
+                                            $('div.iaft.' + identifier_slug + ' section').addClass($(this).text());
+                                            $('div.iaft.' + identifier_slug).parents('section.result').addClass(string_to_slug($(this).text()));
+                                            $('section#ia').addClass(string_to_slug($(this).text()));
                                         });
                                         $(xml).find('identifier').each(function(index, node) {
-                                            $('div.iaft.' + identifier_slug + ' section.iaft').addClass(string_to_slug($(this).text()));
+                                            $('div.iaft.' + identifier_slug + ' section').addClass(string_to_slug($(this).text()));
+                                            $('div.iaft.' + identifier_slug).parents('section.result').addClass(string_to_slug($(this).text()));
+                                            $('section#ia').addClass(string_to_slug($(this).text()));
                                         });
                                     }
                                 });
                             }
                             $(xml).find('collection').each(function(index, node) {
-                                $('div.iaft.' + identifier_slug + ' section.iaft').addClass($(this).text());
+                                $('div.iaft.' + identifier_slug + ' section').addClass(string_to_slug($(this).text()));
+                                $('div.iaft.' + identifier_slug).parents('section.result').addClass(string_to_slug($(this).text()));
+                                $('section#ia').addClass(string_to_slug($(this).text()));
                             });
                             $(xml).find('mediatype').each(function(index, node) {
-                                $('div.iaft.' + identifier_slug + ' section.iaft').addClass($(this).text());
-                            });
+                                $('div.iaft.' + identifier_slug + ' section').addClass(string_to_slug($(this).text()));
+                                $('div.iaft.' + identifier_slug).parents('section.result').addClass(string_to_slug($(this).text()));
+                                $('section#ia').addClass(string_to_slug($(this).text()));});
                             $(xml).find('identifier').each(function(index, node) {
-                                $('div.iaft.' + identifier_slug + ' section.iaft').addClass(string_to_slug($(this).text()));
+                                $('div.iaft.' + identifier_slug + ' section').addClass(string_to_slug($(this).text()));
+                                $('div.iaft.' + identifier_slug).parents('section.result').addClass(string_to_slug($(this).text()));
+                                $('section#ia').addClass(string_to_slug($(this).text()));
                             });
                         },
                         error: function() {
@@ -1160,10 +1226,10 @@ function letsJQuery() {
 
     // Show details for all IAFT blocks
     $('.showAllFiletypes').live('click', function(event) {
-        $(this).attr('disabled', 'disabled');
         $('.showFiletypes').each(function(index, node){
             $(this).click();
         });
+        $(this).remove();
     });
 
     // Get the details from archive.org
@@ -1367,152 +1433,145 @@ function letsJQuery() {
      */
     IAFT.Lightbox.init();
 
-    // Determine if we are on a details or search page
-    if ($('a.titleLink').length) {
-        // Search Page
 
-        // Clear all search terms
-        $('.searchTerm').removeClass('searchTerm');
+    // Watch dom events so the avplayer parent div can be resized when the avplayer
+    // resizes itself
+    document.documentElement.addEventListener('DOMAttrModified', function(e){
+      if (e.attrName === 'style') {
+        if ($(e.explicitOriginalTarget).attr('id')  == 'mwplayer_displayarea') {
+            // Fix sectoin widths
+            $('div#col1').css('margin-left', '0px');
+            $('div#midcol').removeAttr('style');
+            $('div#col1').css('width', $(e.explicitOriginalTarget).css('width'));
+            $('div#col1').width($('div#col1').width() + 33);
 
-        $('a.titleLink').each(function(index, node) {
-            IAFT.buildSections(node);
-        });
-
-        $('#begPgSpcr').append('<button class="showAllFiletypes">Show All Filetypes</button>');
-        $('td.thumbCell').empty();
-
-    } else {
-
-        // Details Page
-
-        // Watch dom events so the avplayer parent div can be resized when the avplayer
-        // resizes itself
-        document.documentElement.addEventListener('DOMAttrModified', function(e){
-          if (e.attrName === 'style') {
-            if ($(e.explicitOriginalTarget).attr('id')  == 'mwplayer_displayarea') {
-                // Fix sectoin widths
-                $('div#col1').css('margin-left', '0px');
-                $('div#midcol').removeAttr('style');
-                $('div#col1').css('width', $(e.explicitOriginalTarget).css('width'));
-                $('div#col1').width($('div#col1').width() + 33);
-
-                $('div#midcol').css('margin-left', $('div#col1').width() - 9);
-            }
-          }
-        }, false);
-
-        // Find identifier
-        uri = parseUri(document.location);
-        identifier = uri.path.substr(9);
-        var identifier_slug = string_to_slug(identifier);
-
-        // Make room for IAFT
-        $('.breadcrumbs').after('<br style="clear:both;" />');
-        $('.breadcrumbs').addClass('IAFTbreadcrumbs');
-
-        // Move AV player
-        if ($('#avplaycontainer').length) {
-            $('#avplaycontainer').detach().insertAfter('div#col1 div.box h1:first');
+            $('div#midcol').css('margin-left', $('div#col1').width() - 9);
         }
+      }
+    }, false);
 
-        // Reformat reviews
-        $('<div id="reviews" class="box"><h1>Reviews</h1></div>').appendTo('div#midcol');
-        reviewHeader = $('h2[style="font-size:125%;"]').detach().appendTo('#reviews').css('font-size', '1em');
-        reviewWrite = $(reviewHeader).find('.rightmost').detach();
-        reviewStars = $(reviewHeader).find('span:last').detach().css('font-size', '1em');
-        $(reviewHeader).html(reviewStars);
+    // Find identifier
+    uri = parseUri(document.location);
+    identifier = uri.path.substr(9);
+    var identifier_slug = string_to_slug(identifier);
 
-        $(reviewWrite).html('<a href="/write-review.php?identifier=' + identifier + '">Write a review</a>');
-        $(reviewHeader).append($(reviewWrite));
+    // Make room for IAFT
+    $('.breadcrumbs').after('<br style="clear:both;" />');
+    $('.breadcrumbs').addClass('IAFTbreadcrumbs');
 
-        // Reformat individual reviews
-        $('p[style="margin:3px; padding:4px; border:1px solid #ccc;"]').addClass('review')
-            .detach()
-            .appendTo('#reviews')
-            .hide()
-            .first()
-            .before('<a href="#" id="show-reviews">Reviews are hidden.  Show Reviews</a>');
-
-        // Fix the ia footer
-        $('div#iafootdiv').detach().insertAfter('div#midcol');
-        $('p#iafoot').detach().appendTo('div#iafootdiv');
-
-        // Change details box header
-        $('span.x-archive-meta-title').parent().html('Details');
-
-        // Change streaming box header
-        $('div#col1 div.box h1:first').html('Stream');
-
-        // Format search
-        $('#searchform').parents('table').addClass('top');
-        $('<input type="submit" value="Search">').insertAfter('#gobutton');
-        $('#gobutton').remove();
-        $('#searchform b').remove();
-        $('a.level3Header.level3HeaderSearch').removeClass('level3HeaderSearch');
-        $('input[name="search"]').attr('placeholder', 'enter search terms');
-        $('select[name="mediatype"]').before('Section');
-
-        // Format header
-        $('body table:first').remove();
-        $('#searchform').prepend('Search');
-        $('<ul id="IAFT-top-nav"><li><a href="/web/web.php">Web</a></li><li><a href="/details/movies">Movies</a></li><li><a href="/details/texts">Text</a></li><li><a href="/details/audio">Audio</a></li><li><a href="/details/software">Software</a></li><li><a href="/about/">About</a></li><li><a href="/create/">Upload</a></li></ul><ul id="IAFT-secondary-nav" class="audio"></ul>').insertBefore('.breadcrumbs');
-        $('td.level2Header a').each(function() {
-            $('#IAFT-secondary-nav').append($('<li />').append($(this)));
-        });
-        $('table.level2Header').remove();
-
-        $('#searchform').parents('table').attr('id', 'header');
-        $('#header').append('<tr><td id="search"></td></tr>');
-        $('#header').append('<tr><td width="100%" colspan="4" id="nav"></td></tr>');
-        $('#header').append('<tr><td width="100%" colspan="4" id="subnav"></td></tr>');
-
-
-
-        // Replace upload button (see next comment)
-        $('a.linkbutton.backColor1').remove();
-
-        // Remove crap
-        $('div#map').remove();
-        $('div#midcol div.box div p.content:first').remove();
-        $('p#iframeVidso').remove();
-        $('img#thumbnail').parent().remove();
-        $('#begPgSpcr').remove();
-        $('p').each(function() {
-            if (!$(this).html()) $(this).remove();
-        });
-        $('.urge').remove();
-        $('div.level3HeaderColorBar').remove();
-
-        // Run IAFT sections
-        $('.breadcrumbs').each(function(index, node) {
-            div = IAFT.buildSections(node, identifier, this, 'after');
-            $(div).addClass('iaftDetails');
-            $(div).find('li.showFiletypes').click();
-        });
-
-        $('div.iaft.' + identifier_slug).prepend('<section class="iaft" id="ia"><h1 id="title"><a href="/">Internet Archive</a></h1><ul id="menu"></ul></section>');
-
-        $('#IAFT-top-nav').detach().appendTo('#menu');
-        $('#IAFT-secondary-nav').detach().appendTo('#menu');
-        $('#searchform').each(function() {
-            $('#IAFT-top-nav').append($('<li />').append($(this)));
-            $(this).removeAttr('style').css('display', 'inline');
-        });
-        $('td.level3Header.level3HeaderLeft').remove();
-
-        // Move edit link
-        $('td.level3Header.level3HeaderUser2 b nobr a').detach().addClass('edit').insertAfter('div#midcol div.box h1:first');
-        $('<b>Administration: </b>').insertBefore($('.edit'));
-
-        // Clean user bar
-        $('td.level3Header.level3HeaderUser2 b nobr').parents('td').remove();
-        div = $('<div id="user"></div>');
-        $('table.top tbody tr td:first').children().detach().prependTo($(div));
-        $(div).prependTo('#title');
-        $('table.top').remove();
-        $('#user b').html($('#user b').html().replace('Hello', ''));
-        $('#user span').html($('#user span').html().replace('not you?', ''));
-
-        $('.breadcrumbs').detach().insertAfter('#ia');
+    // Move AV player
+    if ($('#avplaycontainer').length) {
+        $('#avplaycontainer').detach().insertAfter('div#col1 div.box h1:first');
     }
+
+    // Reformat reviews
+    $('<div id="reviews" class="box"><h1>Reviews</h1></div>').appendTo('div#midcol');
+    reviewHeader = $('h2[style="font-size:125%;"]').detach().appendTo('#reviews').css('font-size', '1em');
+    reviewWrite = $(reviewHeader).find('.rightmost').detach();
+    reviewStars = $(reviewHeader).find('span:last').detach().css('font-size', '1em');
+    $(reviewHeader).html(reviewStars);
+
+    $(reviewWrite).html('<a href="/write-review.php?identifier=' + identifier + '">Write a review</a>');
+    $(reviewHeader).append($(reviewWrite));
+
+    // Reformat individual reviews
+    $('p[style="margin:3px; padding:4px; border:1px solid #ccc;"]').addClass('review')
+        .detach()
+        .appendTo('#reviews')
+        .hide()
+        .first()
+        .before('<a href="#" id="show-reviews">Reviews are hidden.  Show Reviews</a>');
+
+    // Fix the ia footer
+    $('div#iafootdiv').detach().insertAfter('div#midcol');
+    $('p#iafoot').detach().appendTo('div#iafootdiv');
+
+    // Change details box header
+    $('span.x-archive-meta-title').parent().html('Details');
+
+    // Change streaming box header
+    $('div#col1 div.box h1:first').html('Stream');
+
+    // Format search
+    $('#searchform').parents('table').addClass('top');
+    $('<input type="submit" value="Search">').insertAfter('#gobutton');
+    $('#gobutton').remove();
+    $('#searchform b').remove();
+    $('a.level3Header.level3HeaderSearch').removeClass('level3HeaderSearch');
+    $('input[name="search"]').attr('placeholder', 'enter search terms');
+    $('select[name="mediatype"]').before('Section');
+
+    // Format header
+    $('body table:first').remove();
+    $('#searchform').prepend('Search');
+    $('<ul id="IAFT-top-nav"><li><a href="/web/web.php">Web</a></li><li><a href="/details/movies">Movies</a></li><li><a href="/details/texts">Text</a></li><li><a href="/details/audio">Audio</a></li><li><a href="/details/software">Software</a></li><li><a href="/about/">About</a></li><li><a href="/create/">Upload</a></li></ul><ul id="IAFT-secondary-nav" class="audio"></ul>').appendTo('body');
+    $('td.level2Header a').each(function() {
+        $('#IAFT-secondary-nav').append($('<li />').append($(this)));
+    });
+    $('table.level2Header').remove();
+
+    // Replace upload button (see next comment)
+    $('a.linkbutton.backColor1').remove();
+
+    // Remove ephemera
+    $('div#map').remove();
+    $('div#midcol div.box div p.content:first').remove();
+    $('p#iframeVidso').remove();
+    $('img#thumbnail').parent().remove();
+    $('#begPgSpcr').remove();
+    $('p').each(function() {
+        if (!$(this).html()) $(this).remove();
+    });
+    $('.urge').remove();
+    $('div.level3HeaderColorBar').remove();
+
+    $('body').prepend('<section class="iaft" id="ia"><h1 id="title"><a href="/">Internet Archive</a></h1><ul id="menu"></ul></section><br style="clear:both;">');
+
+    $('#IAFT-top-nav').detach().appendTo('#menu');
+    $('#IAFT-secondary-nav').detach().appendTo('#menu');
+    $('#searchform').each(function() {
+        $('#IAFT-top-nav').append($('<li />').append($(this)));
+        $(this).removeAttr('style').css('display', 'inline');
+    });
+
+    $('td.level3Header.level3HeaderLeft').remove();
+
+    // Move edit link
+    $('td.level3Header.level3HeaderUser2 b nobr a').detach().addClass('edit').insertAfter('div#midcol div.box h1:first');
+    $('<b>Administration: </b>').insertBefore($('.edit'));
+
+    // Clean user bar
+    $('td.level3Header.level3HeaderUser2 b nobr').parents('td').remove();
+    div = $('<div id="user"></div>');
+    $('table.top tbody tr td:first').children().detach().prependTo($(div));
+    $(div).prependTo('#title');
+    $('table.top').remove();
+    $('#user b').html($('#user b').html().replace('Hello', ''));
+    $('#user span').html($('#user span').html().replace('not you?', ''));
+
+    // Search
+    $('.searchTerm').removeClass('searchTerm');
+    $('td.thumbCell').empty();
+    $('td.numberCell').remove();
+
+    $('.hitCell').each(function(index, node) {
+        $('<section class="result"></section>').append($(this).html()).appendTo('body');
+    });
+    $('table.searchResults').remove();
+
+    $('.breadcrumbs').detach().insertAfter('#ia');
+
+    // Run IAFT sections
+    $('a.titleLink').each(function(index, node) {
+        IAFT.buildSections(node);
+    });
+
+    $('.breadcrumbs').each(function(index, node) {
+        div = IAFT.buildSections(node, identifier, this, 'after');
+        $(div).addClass('iaftDetails');
+        $(div).find('li.showFiletypes').click();
+    });
+
+    $('section.result:first').before('<button class="showAllFiletypes">Show All Filetypes</button>');
+    $('.showAllFiletypes').click();
 }

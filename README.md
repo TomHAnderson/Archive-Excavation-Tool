@@ -8,6 +8,8 @@ http://www.userscripts.org/scripts/show/140553
 
 RELEASES
 --------
+1.0.4 - Search page rewritten
+
 1.0.3 - Search enabled
 
 1.0.2 - Audio over sound
