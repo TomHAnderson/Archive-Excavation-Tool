@@ -65,6 +65,16 @@ try
 
 // CSS
 GM_addStyle("\
+    ul.results { \
+        width: 100% \
+    } \
+    \
+    ul.results li { \
+        float: left; \
+        width: 27em; \
+        list-style-type: none;  \
+    } \
+   \
     div.iaft { \
         clear: both;\
     } \
@@ -1315,12 +1325,14 @@ function letsJQuery() {
 
     // Filter all rows using insensitive indexof function
     $('.filter').live('click', function() {
+        $('#wait').show();
         $('table#browse tbody tr td ul li').show();
         $('table#browse li').each(function(index, node) {
             if ($('#filter').val() && $(this).find('a:first').html().toLowerCase().indexOf($('#filter').val().toLowerCase().trim()) == -1) {
                 $(this).hide();
             }
         });
+        $('#wait').hide();
     });
 
 
@@ -1576,8 +1588,11 @@ function letsJQuery() {
 
     // Browse etree
     $('<section class="result etree"><span class="betterTitle">Artists</span></section>').append($('#browse').detach()).insertBefore('table[style="width:100%;"]');
-    $('section.result.etree span').after('<input value="" placeholder="enter filter string" id="filter" type="text"> <button class="filter">Filter</button>');
+    $('section.result.etree span').after('<input value="" placeholder="enter filter string" id="filter" type="text"> <button class="filter">Filter</button><img src="http://db.etree.org/cd.gif" style="display: none;" id="wait">');
     $('table[style="width:100%;"]').remove();
+
+    $('#browse ul').addClass('results').detach().appendTo('section.result.etree').append('<br style="clear: both;">');
+    $('#browse').remove();
 
     // Run IAFT sections
     $('a.titleLink').each(function(index, node) {
