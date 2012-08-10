@@ -1,7 +1,6 @@
-Internet Archive 2012
-===========================
-This script extends the work of IAFT by modifying the page layout extensively for archive detail items.
-
+Archive Excavation Tool
+=======================
+AET is a greasemoneky plugin for archive.org
 
 INSTALL
 -------

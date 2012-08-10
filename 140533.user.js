@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Internet Archive 2012
+// @name           Archive Excavation Tool
 // @namespace      www.archive.org
 // @description    A tool to provide extended functionality for archive entries
 // @include        http://archive.org/search.php*
@@ -1248,18 +1248,18 @@ function letsJQuery() {
     // Show the about screen
     $('.iaft_about').live('click', function(event) {
         IAFT.Lightbox.close();
-        IAFT.Lightbox.show(' \
-        <div><h1><img src="http://db.etree.org/images/ico/filetype arc.png" align="left"> Internet Archive File Types</h1> \
+         IAFT.Lightbox.show(' \
+        <div><h1>Archive Excavation Tool</h1> \
         \
             <p> \
-                The home page for IAFT is <a href="http://userscripts.org/scripts/show/107166">http://userscripts.org/scripts/show/107166</a> \
+                AET homepage: <a href="http://userscripts.org/scripts/show/140553">http://userscripts.org/scripts/show/140553</a> \
                 <br> \
-                There is a changelog there if you\'d like to see what\'s new in each version. \
+                AET is a derivitve work of IAFT: <a href="http://userscripts.org/scripts/show/107166">http://userscripts.org/scripts/show/107166</a> \
             </p> \
             <p> \
-                IAFT is open sourced under the <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>. \
+                AET is open sourced under the <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>. \
                 \
-                IAFT is able to work it\'s magic by leveraging <a href="http://developer.yahoo.com/yql/">YQL</a> and  \
+                AET is able to work it\'s magic by leveraging <a href="http://developer.yahoo.com/yql/">YQL</a> and  \
                 <a href="http://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting</a>. \
             </p> \
             <p> \
@@ -1267,7 +1267,7 @@ function letsJQuery() {
                 To contribute icons please use this library and email your contribution to <a href="mailto:tom.h.anderson@gmail.com">tom.h.anderson@gmail.com</a>. \
             </p> \
             <p> \
-               IAFT is a project of Tom Anderson.  \
+               EAT & IAFT are projects of Tom Anderson.  \
                <br> \
                Produced by <a href="http://db.etree.org/">db.etree.org</a>.  \
            </p> \
