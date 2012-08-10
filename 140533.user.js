@@ -1456,7 +1456,7 @@ function letsJQuery() {
         // Format header
         $('body table:first').remove();
         $('#searchform').prepend('Search');
-        $('<ul id="IAFT-top-nav"><li><a href="/web/web.php">Web</a></li><li><a href="/details/movies">Moving Images</a></li><li><a href="/details/texts">Texts</a></li><li><a href="/details/audio">Audio</a></li><li><a href="/details/software">Software</a></li><li><a href="/account/login.php">Patron Info</a></li><li><a href="/about/">About IA</a></li><li><a href="/projects/">Projects</a></li><li><a href="/create/">Upload</a></li></ul><ul id="IAFT-secondary-nav" class="audio"></ul>').insertBefore('.breadcrumbs');
+        $('<ul id="IAFT-top-nav"><li><a href="/web/web.php">Web</a></li><li><a href="/details/movies">Movies</a></li><li><a href="/details/texts">Text</a></li><li><a href="/details/audio">Audio</a></li><li><a href="/details/software">Software</a></li><li><a href="/about/">About</a></li><li><a href="/create/">Upload</a></li></ul><ul id="IAFT-secondary-nav" class="audio"></ul>').insertBefore('.breadcrumbs');
         $('td.level2Header a').each(function() {
             $('#IAFT-secondary-nav').append($('<li />').append($(this)));
         });

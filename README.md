@@ -4,7 +4,7 @@ AET is a greasemoneky plugin for archive.org
 
 INSTALL
 -------
-http://userscripts.org/scripts/show/140533
+http://www.userscripts.org/scripts/show/140533
 
 RELEASES
 --------
