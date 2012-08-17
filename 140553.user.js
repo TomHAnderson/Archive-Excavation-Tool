@@ -7,6 +7,7 @@
 // @include        http://archive.org/browse.php*
 // @include        http://*.archive.org/search.php*
 // @include        http://*.archive.org/details/*
+// @icon           http://s3.amazonaws.com/uso_ss/icon/140977/large.jpg?1345028429
 // @version        1.0.6
 // @author         Tom Anderson <tom.h.anderson@gmail.com>
 // ==/UserScript==
