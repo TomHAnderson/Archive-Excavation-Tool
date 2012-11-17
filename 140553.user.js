@@ -2,13 +2,23 @@
 // @name           Archive Excavation Tool
 // @namespace      www.archive.org
 // @description    A tool to provide extended functionality for archive entries
+// @include        https://archive.org/search.php*
+// @include        https://archive.org/details/*
+// @include        https://*.archive.org/search.php*
+// @include        https://*.archive.org/details/*
 // @include        http://archive.org/search.php*
 // @include        http://archive.org/details/*
-// @include        http://archive.org/browse.php*
 // @include        http://*.archive.org/search.php*
 // @include        http://*.archive.org/details/*
-// @icon           http://s3.amazonaws.com/uso_ss/icon/140977/large.jpg?1345028429
-// @version        1.0.6
+// @grant          GM_getValue
+// @grant          GM_xmlhttpRequest
+// @grant          GM_setValue
+// @grant          GM_getValue
+// @grant          GM_openInTab
+// @grant          GM_registerMenuCommand
+// @grant          GM_addStyle
+// @grant          GM_wait
+// @version        1.0.7
 // @author         Tom Anderson <tom.h.anderson@gmail.com>
 // ==/UserScript==
 
@@ -1602,10 +1612,6 @@ function letsJQuery() {
     $('<section class="result etree"><span class="betterTitle">Artists</span></section>').append($('#browse').detach()).insertBefore('table[style="width:100%;"]');
     $('section.result.etree span').after('<input value="" placeholder="enter filter string" id="filter" type="text"> <button class="filter">Filter</button><img src="http://db.etree.org/cd.gif" style="display: none;" id="wait">');
     $('table[style="width:100%;"]').remove();
-
-    $('#browse a').each(function(index, node) {
-        $(this).css('font-size', '1em').css('font-weight', 'normal');
-    });
 
     $('#browse ul').addClass('results').detach().appendTo('section.result.etree').append('<br style="clear: both;">');
     $('#browse').remove();

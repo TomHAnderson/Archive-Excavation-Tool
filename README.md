@@ -8,6 +8,8 @@ http://www.userscripts.org/scripts/show/140553
 
 RELEASES
 --------
+1.0.7 - Support https
+
 1.0.6 - Added logo
 
 1.0.5 - etree collection direct access including a filter for artist list
