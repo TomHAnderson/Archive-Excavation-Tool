@@ -75,5 +75,5 @@ try
 } catch(err) {}
 
 var script = document.createElement("script");
-script.src = "https://raw.githubusercontent.com/TomHAnderson/IAFT/master/main.js";
+script.src = "https://raw.githubusercontent.com/TomHAnderson/Archive-Excavation-Tool/master/main.js";
 document.getElementsByTagName("head")[0].appendChild(script);

@@ -1,3 +1,10 @@
+// ==UserScript==
+// @name           Archive Excavation Tool
+// @namespace      www.archive.org
+// @description    A tool to provide extended functionality for archive entries
+// @version        1.0.8
+// @author         Tom Anderson <tom.h.anderson@gmail.com>
+// ==/UserScript==
 
 // CSS
 $("<style>\

@@ -8,6 +8,8 @@ http://www.userscripts.org/scripts/show/140553
 
 RELEASES
 --------
+1.0.8 - jQuery compatible fixes due to changes in Firefox
+
 1.0.7 - Support https
 
 1.0.6 - Added logo
